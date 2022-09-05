@@ -23,3 +23,77 @@ class Solution
     }
     return ans;}
 };
+//reverse level order traversal
+class Solution
+{
+    public:
+    //Function to return the level order traversal of a tree.
+    vector<int> levelOrder(Node* node){
+    vector<int>ans;
+    queue<Node*>q;
+    q.push(node);
+    if(node==NULL)
+    return ans;
+    while(!q.empty()){
+        Node*temp=q.front();
+        q.pop();
+        ans.push_back(temp->data);
+        if(temp->left!=NULL){
+            q.push(temp->left);
+        }
+        if(temp->right!=NULL){
+            q.push(temp->right);}
+      
+    }
+    return ans;}
+};
+//Inorder level transerversal
+class Solution {
+ public:
+   
+   vector <int> ans;
+   void Inorder(Node *p)
+   {
+       if(p != NULL)
+       {
+           Inorder(p->left);
+           ans.push_back(p->data);
+           Inorder(p->right);
+       }
+   }
+
+   vector<int> inOrder(Node* root) {
+       Inorder(root);
+       return ans;
+   }
+};
+//preorder traversal
+void preordertraversal(Node*root,vector<int>&ans){
+    if(root==NULL) return ;
+    ans.push_back(root->data);
+    preordertraversal(root->left,ans);
+    preordertraversal(root->right,ans);
+}
+vector <int> preorder(Node* root)
+{
+  // Your code here
+  vector<int>ans;
+   preordertraversal(root,ans);
+   return ans;
+}
+//postorder traversal
+void solve(Node* root,vector<int>&ans){
+    if(root==NULL){
+        return ;
+    }
+    solve(root->left,ans);
+    solve(root->right,ans);
+    ans.push_back(root->data);
+}
+vector <int> postOrder(Node* root)
+{
+    vector<int>ans;
+  // Your code here
+  solve(root,ans);
+  return ans;
+}
